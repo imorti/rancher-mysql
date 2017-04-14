@@ -1,26 +1,19 @@
 version: '2'
 volumes:
-  mysql-dev:
+  mysql-demo:
     external: true
     driver: 'null'
 services:
-  mysql-lb:
-    image: rancher/lb-service-haproxy:v0.6.2
-    ports:
-    - 3306:3306/tcp
-    labels:
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
   mysql:
     image: mysql:5.6
     environment:
-      MYSQL_DATABASE: <database>
-      MYSQL_PASSWORD: <password>
-      MYSQL_ROOT_PASSWORD: <root password>
-      MYSQL_USER: <username>
+      MYSQL_DATABASE: mysql-demo
+      MYSQL_PASSWORD: fantastic
+      MYSQL_ROOT_PASSWORD: awesome
+      MYSQL_USER: youguys
     stdin_open: true
     volumes:
-    - mysql-dev:/var/lib/mysql
+    - mysql-demo:/var/lib/mysql
     tty: true
     ports:
     - 3306:3306/tcp
